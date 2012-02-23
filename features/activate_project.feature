@@ -7,4 +7,4 @@ Feature: Mark a project as active
     Given I'm logged in
     And   I have a project called "Sharepoint++"
     When  I activate the project
-    Then  I the project "Sharepoint++" should be active in the listing
+    Then  the project should be active in the listing

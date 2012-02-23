@@ -3,6 +3,10 @@ class ProjectListPage
     
     def navigate
       visit('/projects')
+      self
+    end
+    
+    def edit
     end
     
     def projects
