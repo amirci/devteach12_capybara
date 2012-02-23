@@ -3,11 +3,10 @@ Given /^I have some projects loaded$/ do
 end
 
 When /^I go to the projects page$/ do
-  visit('/projects')
+  @listing = ProjectListPage.new
+  @listing.navigate
 end
 
 Then /^I should see the complete list of projects$/ do
-  listing = ProjectListPage.new
-  
-  listing.projects.should == Project.all.map { |p| {name: p.name, description: p.description} }
+  @listing.projects.should == Project.all.map { |p| {name: p.name, description: p.description} }
 end

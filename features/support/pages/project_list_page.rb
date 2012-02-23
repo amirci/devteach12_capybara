@@ -1,6 +1,10 @@
 class ProjectListPage
     include PageObject
     
+    def navigate
+      visit('/projects')
+    end
+    
     def projects
       all(:css, "#projects tr").
         drop(1). #drop the header
