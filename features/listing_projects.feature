@@ -7,4 +7,4 @@ Feature: Listing projects
     Given I'm logged in
     And   I have some projects loaded
     When  I go to the projects page
-    Then  I should the complete list of projects
+    Then  I should see the complete list of projects
