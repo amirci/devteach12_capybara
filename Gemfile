@@ -21,6 +21,7 @@ group :development do
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'fabricator'
 end
 
 gem 'jquery-rails'
