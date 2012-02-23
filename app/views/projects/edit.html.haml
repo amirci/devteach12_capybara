@@ -1,0 +1,10 @@
+%h1= @project.name
+
+= simple_form_for @project do |p|
+
+  .inputs
+    .field
+      = p.input :active
+
+  .actions
+    = p.submit 'Save Project'
