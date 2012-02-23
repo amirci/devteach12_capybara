@@ -7,5 +7,9 @@ When /^I go to the projects page$/ do
 end
 
 Then /^I should the complete list of projects$/ do
-  pending # express the regexp above with the code you wish you had
+  actual = all(:css, "#projects").
+                    drop(1). #drop the header
+                    map { |r| r.all(:css, 'td').map { |node| node.text } }
+  
+  actual.should == Project.all.map { |p| [p.name, p.description] }
 end
