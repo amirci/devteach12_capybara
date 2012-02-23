@@ -11,13 +11,19 @@ When /^I go to the projects page$/ do
 end
 
 When /^I activate the project$/ do
-  ProjectListPage.new.
-    navigate.
-    edit(@last_project).
-    activate.
-    save
+  @listing = ProjectListPage.new.
+              navigate.
+              edit(@last_project).
+              activate.
+              save
 end
 
 Then /^I should see the complete list of projects$/ do
   @listing.projects.should == Project.all.map { |p| {name: p.name, description: p.description} }
+end
+
+Then /^the project should be active in the listing$/ do
+  actual = @listing.projects.select { |p| p[:name] == @last_project.name }.first
+  
+  actual[:active].should be_true
 end

@@ -5,9 +5,11 @@
     %tr
       %th Name
       %th Description
+      %th Actions
 
   %tbody   
     - @projects.each do |p|
       %tr
         %td= p.name
         %td= p.description
+        %td= link_to "Edit", edit_project_path(p)
