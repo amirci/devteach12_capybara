@@ -7,7 +7,7 @@ When /^I go to the projects page$/ do
 end
 
 Then /^I should the complete list of projects$/ do
-  actual = all(:css, "#projects").
+  actual = all(:css, "#projects tr").
                     drop(1). #drop the header
                     map { |r| r.all(:css, 'td').map { |node| node.text } }
   

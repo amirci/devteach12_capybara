@@ -1,5 +1,13 @@
 %h1 Projects
 
-%ul
-  - @projects.each do |p|
-    %li= "#{p.name}: #{p.description}"
+%table#projects
+  %thead
+    %tr
+      %th Name
+      %th Description
+
+  %tbody   
+    - @projects.each do |p|
+      %tr
+        %td= p.name
+        %td= p.description
