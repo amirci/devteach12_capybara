@@ -20,6 +20,7 @@ end
 group :development do
   gem 'rspec-rails'
   gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
 
 gem 'jquery-rails'
