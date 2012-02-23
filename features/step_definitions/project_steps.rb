@@ -13,7 +13,7 @@ end
 When /^I activate the project$/ do
   ProjectListPage.new.
     navigate.
-    edit.
+    edit(@last_project).
     activate.
     save
 end

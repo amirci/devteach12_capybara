@@ -6,7 +6,10 @@ class ProjectListPage
       self
     end
     
-    def edit
+    def edit(project)
+      row = find(:xpath, "//td[.='#{project.name}']")
+      row = click_link('Edit')
+      ProjectEditPage.new
     end
     
     def projects
