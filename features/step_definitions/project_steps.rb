@@ -7,24 +7,22 @@ Given /^I have a project called "([^"]*)"$/ do |name|
 end
 
 When /^I go to the projects page$/ do
-  @listing = ProjectListPage.new.navigate
+  project_list_page.navigate
 end
 
 When /^I activate the project$/ do
-  @listing = ProjectListPage.new.
-              navigate.
-              edit(@last_project).
-              activate.
-              save
+  project_list_page.
+    navigate.
+    edit(@last_project).
+    activate.
+    save
 end
 
 Then /^I should see the complete list of projects$/ do
-  @listing.projects.should == Project.all.map { |p| {name: p.name, description: p.description, active?: p.active?} }
+  project_list_page.projects.should == Project.all.map { |p| {name: p.name, description: p.description, active?: p.active?} }
 end
 
 Then /^the project should be active in the listing$/ do
-  puts "**** Here are the projects #{@listing.projects}"
-  actual = @listing.projects.select { |p| p[:name] == @last_project.name }.first
-  
-  actual[:active].should be_true
+  actual = project_list_page.projects.select { |p| p[:name] == @last_project.name }.first
+  actual[:active?].should be_true
 end

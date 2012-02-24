@@ -8,7 +8,7 @@ class ProjectListPage
     
     def edit(project)
       row = find(:xpath, "//td[.='#{project.name}']")
-      row = click_link('Edit')
+      row.parent.click_link('Edit')
       ProjectEditPage.new
     end
     
@@ -18,4 +18,12 @@ class ProjectListPage
         map { |r| r.all(:css, 'td').map { |node| node.text } }.
         map { |r| { name: r[0], description: r[1], active?: r[2] == 'true' } }
     end
+    
+    module Helper 
+      def project_list_page
+        ProjectListPage.new
+      end
+    end
 end
+
+World(ProjectListPage::Helper)
