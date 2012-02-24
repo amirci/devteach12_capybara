@@ -19,10 +19,11 @@ When /^I activate the project$/ do
 end
 
 Then /^I should see the complete list of projects$/ do
-  @listing.projects.should == Project.all.map { |p| {name: p.name, description: p.description} }
+  @listing.projects.should == Project.all.map { |p| {name: p.name, description: p.description, active?: p.active?} }
 end
 
 Then /^the project should be active in the listing$/ do
+  puts "**** Here are the projects #{@listing.projects}"
   actual = @listing.projects.select { |p| p[:name] == @last_project.name }.first
   
   actual[:active].should be_true

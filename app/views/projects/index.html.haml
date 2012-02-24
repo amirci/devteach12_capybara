@@ -5,6 +5,7 @@
     %tr
       %th Name
       %th Description
+      %th Active?
       %th Actions
 
   %tbody   
@@ -12,4 +13,5 @@
       %tr
         %td= p.name
         %td= p.description
+        %td= p.active?
         %td= link_to "Edit", edit_project_path(p)
