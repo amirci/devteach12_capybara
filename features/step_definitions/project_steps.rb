@@ -3,7 +3,7 @@ Given /^I have some projects loaded$/ do
 end
 
 Given /^I have a project called "([^"]*)"$/ do |name|
-  @last_project = Project.create(name: name, description: "A cool project called #{name}")
+  set_current_project Project.create(name: name, description: "A cool project called #{name}")
 end
 
 When /^I go to the projects page$/ do
@@ -13,16 +13,18 @@ end
 When /^I activate the project$/ do
   project_list_page.
     navigate.
-    edit(@last_project).
+    edit(current_project).
     activate.
     save
 end
 
 Then /^I should see the complete list of projects$/ do
-  project_list_page.projects.should == Project.all.map { |p| {name: p.name, description: p.description, active?: p.active?} }
+  to_compare = lambda { |p| [p.name, p.description] }
+  actual = project_list_page.projects.map(&to_compare)
+  expected = Project.all.map(&to_compare)
+  actual.should == expected
 end
 
 Then /^the project should be active in the listing$/ do
-  actual = project_list_page.projects.select { |p| p[:name] == @last_project.name }.first
-  actual[:active?].should be_true
+  project_list_page.with_name(current_project.name).active?.should be_true
 end
