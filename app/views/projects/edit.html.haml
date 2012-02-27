@@ -1,10 +1,19 @@
-%h1= @project.name
+- content_for :breadcrumb do
+  %li
+    =link_to "Home", root_path 
+    %span.divider /
+  %li.active Edit project
 
-= simple_form_for @project do |p|
 
-  .inputs
-    .field
-      = p.input :active
 
-  .actions
-    = p.submit 'Save Project'
+= simple_form_for @project, :html => { :class => 'form-horizontal' }  do |f|
+
+  %legend= @project.name
+  
+  = f.input :name, :input_html => { :class => "span6" }, :hint => "Project name"
+                
+  = f.input :active?, as: :boolean 
+  
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = submit_tag 'Cancel', :type => :reset, :class => "btn btn-danger"

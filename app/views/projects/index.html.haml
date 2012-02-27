@@ -1,6 +1,10 @@
-%h1 Projects
+- content_for :breadcrumb do 
+  %li.active Home
 
-%table#projects
+
+%h1 Listing Projects
+
+%table#projects{ class: "table table-bordered table-striped" }
   %thead
     %tr
       %th Name
