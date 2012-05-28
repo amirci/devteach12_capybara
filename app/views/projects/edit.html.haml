@@ -1,6 +1,6 @@
 - content_for :breadcrumb do
   %li
-    =link_to "Home", root_path 
+    =link_to "Home", projects_path 
     %span.divider /
   %li.active Edit project
 
@@ -12,8 +12,8 @@
   
   = f.input :name, :input_html => { :class => "span6" }, :hint => "Project name"
                 
-  = f.input :active?, as: :boolean 
-  
+  = f.input :active?, :as => :boolean 
+
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = submit_tag 'Cancel', :type => :reset, :class => "btn btn-danger"
