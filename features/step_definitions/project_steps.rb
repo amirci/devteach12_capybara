@@ -6,8 +6,8 @@ Given /^I have a project called "([^"]*)"$/ do |name|
   current_project FactoryGirl.create(:project, name: name)
 end
 
-When /^I browse the projects$/ do
-  pending
+When /^I browse all the projects$/ do
+  visit "/projects"
 end
 
 When /^I activate the project$/ do
