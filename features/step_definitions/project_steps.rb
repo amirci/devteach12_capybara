@@ -3,6 +3,7 @@ Given /^I have some projects loaded$/ do
 end
 
 Given /^I have a project called "([^"]*)"$/ do |name|
+  step %q{I have some projects loaded}
   current_project FactoryGirl.create(:project, name: name)
 end
 
@@ -19,6 +20,9 @@ When /^I activate the project$/ do
   click_button("Update Project")
 end
 
+When /^I delete the project$/ do
+end
+
 Then /^I should see the complete list of projects$/ do
   actual = all(:css, "#projects tbody tr")
     .map { |tr| tr.all("td").map(&:text) }
@@ -32,4 +36,9 @@ Then /^the project should be shown active on the listing$/ do
   within "tr[data-id='#{current_project.id}']" do
     find("td:nth-child(3)").text.should == 'true'
   end
+end
+
+Then /^I should not see the project in the listing$/ do
+  visit projects_path
+  page.should_not have_content(current_project.name)
 end

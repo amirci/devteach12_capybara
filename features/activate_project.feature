@@ -1,4 +1,3 @@
-@wip
 Feature: Mark a project as active
   As a manager
   I want to activate a project
