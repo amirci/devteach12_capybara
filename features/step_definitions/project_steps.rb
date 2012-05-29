@@ -2,7 +2,7 @@ Given /^I have some projects loaded$/ do
   FactoryGirl.create_list(:project, 10)
 end
 
-Given /^I have a project called "([^"]*)"$/ do |name|
+Given /^I have a project called "(#{PROJECT_NAME})"$/ do |name|
   current_project FactoryGirl.create(:project, name: name)
 end
 
