@@ -1,30 +1,48 @@
 Given /^I have some projects loaded$/ do
-  10.times { |i| Project.create(name: "Project #{i}", description: "The best project ever")}
+  FactoryGirl.create_list(:project, 10)
 end
 
 Given /^I have a project called "([^"]*)"$/ do |name|
-  set_current_project Project.create(name: name, description: "A cool project called #{name}")
+  current_project FactoryGirl.create(:project, name: name)
 end
 
-When /^I go to the projects page$/ do
-  project_list_page.navigate
+When /^I browse all the projects$/ do
+  visit projects_path
 end
 
 When /^I activate the project$/ do
-  project_list_page.
-    navigate.
-    edit(current_project).
-    activate.
-    save
+  step "I browse all the projects"
+  within "tr[data-id='#{current_project.id}']" do
+    click_link("Edit")
+  end
+  check('project_active')
+  click_button("Update Project")
+end
+
+When /^I delete the project$/ do
+  visit projects_path
+  within "tr[data-id='#{current_project.id}']" do
+    page.evaluate_script('window.confirm = function() { return true; }')
+    click_link("Delete")
+  end
 end
 
 Then /^I should see the complete list of projects$/ do
-  to_compare = lambda { |p| [p.name, p.description] }
-  actual = project_list_page.projects.map(&to_compare)
-  expected = Project.all.map(&to_compare)
+  actual = all(:css, "#projects tbody tr")
+    .map { |tr| tr.all("td").map(&:text) }
+    .map { |cells| {name: cells[0], description: cells[1], active: cells[2] == 'true'}}
+  expected = Project.all.map { |p| {name: p.name, description: p.description, active: p.active} }
   actual.should == expected
 end
 
-Then /^the project should be active in the listing$/ do
-  project_list_page.with_name(current_project.name).active?.should be_true
+Then /^the project should be shown active on the listing$/ do
+  step "I browse all the projects"
+  within "tr[data-id='#{current_project.id}']" do
+    find("td:nth-child(3)").text.should == 'true'
+  end
+end
+
+Then /^I should not see the project in the listing$/ do
+  visit projects_path
+  page.should_not have_content(current_project.name)
 end

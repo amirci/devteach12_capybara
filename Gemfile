@@ -8,8 +8,8 @@ gem 'rails', '3.1.3'
 gem 'sqlite3'
 gem 'haml'
 gem 'json'
-gem 'less-rails-bootstrap'
-gem 'simple_form', '~> 2.0.0'
+gem 'twitter-bootstrap-rails'
+gem 'simple_form'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -23,9 +23,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'database_cleaner'
-  gem 'fabricator'
+  gem 'factory_girl_rails'
   gem 'spork'
   gem 'shoulda-matchers'  
+  gem 'faker'
+  gem 'capybara-webkit'
 end
 
 gem 'jquery-rails'
