@@ -19,3 +19,4 @@
         %td= p.description
         %td= p.active?
         %td= link_to "Edit", edit_project_path(p)
+        %td= link_to "Delete", project_path(p), :method => :delete, :class => "delete", :confirm => "Are you sure ?"

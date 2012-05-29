@@ -21,6 +21,11 @@ When /^I activate the project$/ do
 end
 
 When /^I delete the project$/ do
+  visit projects_path
+  within "tr[data-id='#{current_project.id}']" do
+    click_link("Delete")
+    page.driver.browser.switch_to.alert.accept
+  end
 end
 
 Then /^I should see the complete list of projects$/ do
