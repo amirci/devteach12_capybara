@@ -14,7 +14,7 @@
 
   %tbody   
     - @projects.each do |p|
-      %tr
+      %tr{"data-id" => p.id}
         %td= p.name
         %td= p.description
         %td= p.active?

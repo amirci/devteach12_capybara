@@ -11,7 +11,11 @@ When /^I browse all the projects$/ do
 end
 
 When /^I activate the project$/ do
-  pending
+  step "I browse all the projects"
+  within "tr[data-id='#{current_project.id}']" do
+    click_link("Edit")
+  end
+  check('project_active')
 end
 
 Then /^I should see the complete list of projects$/ do
@@ -22,6 +26,6 @@ Then /^I should see the complete list of projects$/ do
   actual.should == expected
 end
 
-Then /^the project should be shown active in the listing$/ do
+Then /^the project should be shown active on the listing$/ do
   pending
 end
