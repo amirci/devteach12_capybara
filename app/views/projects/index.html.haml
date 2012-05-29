@@ -4,6 +4,9 @@
 
 %h1 Listing Projects
 
+- if @projects.empty?
+  %h2 Projects are empty!
+
 %table#projects{ class: "table table-bordered table-striped" }
   %thead
     %tr
