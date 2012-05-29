@@ -1,5 +1,5 @@
 Feature: Listing projects
- As a user
+  As a user
   I Want to see the list of projects
   So I can choose one to see the details
 
