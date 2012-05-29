@@ -7,7 +7,7 @@ Given /^I have a project called "([^"]*)"$/ do |name|
 end
 
 When /^I browse all the projects$/ do
-  visit "/projects"
+  visit projects_path
 end
 
 When /^I activate the project$/ do
@@ -16,6 +16,7 @@ When /^I activate the project$/ do
     click_link("Edit")
   end
   check('project_active')
+  click_button("Update Project")
 end
 
 Then /^I should see the complete list of projects$/ do
@@ -27,5 +28,8 @@ Then /^I should see the complete list of projects$/ do
 end
 
 Then /^the project should be shown active on the listing$/ do
-  pending
+  step "I browse all the projects"
+  within "tr[data-id='#{current_project.id}']" do
+    find("td:nth-child(3)").text.should == 'true'
+  end
 end
