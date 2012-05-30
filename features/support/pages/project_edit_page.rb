@@ -2,12 +2,12 @@ class ProjectEditPage
   include PageObject
   
   def activate
-    check("project_active")
+    check('project_active')
     self
   end
   
   def save
-    click_button("Save Project")
+    click_button("Update Project")
     ProjectListPage.new
   end
   

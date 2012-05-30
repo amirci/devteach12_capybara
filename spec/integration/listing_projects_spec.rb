@@ -1,10 +1,16 @@
 require 'spec_helper'
 
-feature 'listing projects' do
+feature 'listing projects', %q{
+  As a User
+  I want to list all project
+  So I can choose one to start working on
+  } do
   
-  scenario 'listing all projects' do
+  scenario 'list all projects' do
     FactoryGirl.create_list(:project, 10)
+
     visit projects_path
+    
     actual = all(:css, "#projects tbody tr")
       .map { |tr| tr.all("td").map(&:text) }
       .map { |cells| {name: cells[0], description: cells[1], active: cells[2] == 'true'}}
